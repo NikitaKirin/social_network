@@ -1,31 +1,68 @@
 @extends('layouts.app')
 @section('title', 'Зарегистрироваться')
 @section('main')
-    <form method="post">
+    @include('inc.header')
+    <form method="post" action="{{ route('register') }}">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Имя</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                   value="{{ old('name') }}">
+            @error('name')
+            <span class="invalid-feedback">
+                {{ $message }}
+            </span>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="surname" class="form-label">Фамилия</label>
-            <input type="text" class="form-control" id="surname" name="surname">
+            <input type="text" class="form-control @error('surname') is-invalid @enderror" id="surname" name="surname"
+                   value="{{ old('surname') }}">
+            @error('surname')
+            <span class="invalid-feedback">
+                {{ $message }}
+            </span>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="city" class="form-label">Город</label>
-            <input type="text" class="form-control" id="city" name="city">
+            <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city"
+                   value="{{ old('city') }}">
+            @error('city')
+            <span class="invalid-feedback">
+                {{ $message }}
+            </span>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="birthday" class="form-label">Дата рождения</label>
-            <input type="date" class="form-control" id="birthday" name="birthday">
+            <input type="date" class="form-control @error('birthday') is-invalid @enderror" id="birthday"
+                   name="birthday" value="{{ old('birthday') }}">
+            @error('birthday')
+            <span class="invalid-feedback">
+                {{ $message }}
+            </span>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+            <input type="email" class="form-control @error('email') is-invalid @enderror" id="exampleInputEmail1"
+                   aria-describedby="emailHelp" name="email" value="{{ old('email') }}">
+            @error('email')
+            <span class="invalid-feedback">
+                {{ $message }}
+            </span>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Пароль</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+            <input type="password" class="form-control @error('password') @enderror" id="exampleInputPassword1"
+                   name="password">
+            @error('password')
+            <span class="invalid-feedback">
+                {{ $message }}
+            </span>
+            @enderror
         </div>
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">

@@ -2,7 +2,7 @@
 @section('title', 'Социальная сеть')
 @section('main')
     @include('inc.header')
-    <form method="post">
+    <form method="post" action="{{ route('login') }}">
         @csrf
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email</label>

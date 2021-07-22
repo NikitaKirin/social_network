@@ -20,8 +20,14 @@
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <a class="btn btn-outline-success me-2" type="button">Вход</a>
-                    <a class="btn btn-sm btn-outline-secondary" type="button">Выход</a>
+                    @guest
+                        <a class="btn btn-outline-success me-2" type="button"
+                           href="{{ route('register') }}">Регистрация</a>
+                        <a class="btn btn-outline-success me-2" type="button" href="{{ route('login') }}">Вход</a>
+                    @endguest
+                    @auth
+                        <a class="btn btn-danger" type="button" href="{{ route('logout') }}">Выход</a>
+                    @endauth
                 </form>
             </div>
         </div>
