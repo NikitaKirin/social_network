@@ -44,6 +44,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // Создаем связь один-с-многим
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
     // Мутатор для хеширования пароля пользователя.
     public function setPasswordAttribute($value)
     {

@@ -11,4 +11,11 @@ class Article extends Model
         'annotation',
         'text',
     ];
+
+    // Создаем обратную связь много-с-одним
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

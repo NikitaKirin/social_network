@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,10 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/home', function () {
     return view('home');
 })->name('home')->middleware('auth');
+
+Route::get('/articles/create', [ArticleController::class, 'index'])->name('create-article')->middleware('auth');
+Route::post('/articles/create', [ArticleController::class, 'create'])->name('create-article');
+Route::get('/articles/all', [ArticleController::class, 'allArticles'])->name('all-articles');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'create'])->name('register');
