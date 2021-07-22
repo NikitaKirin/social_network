@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use phpDocumentor\Reflection\Types\Self_;
 
 class ArticleController extends Controller
 {
@@ -37,10 +36,16 @@ class ArticleController extends Controller
     public function allArticles()
     {
         $articles = Article::all();
-/*        foreach ($articles as $article)
-        {
-            dd($article->user()->first());
-        }*/
+        /*        foreach ($articles as $article)
+                {
+                    dd($article->user()->first());
+                }*/
         return view('articles.articles', ['articles' => $articles]);
+    }
+
+    public function article($id)
+    {
+        $article = Article::find($id);
+        return view('articles.article', ['article' => $article]);
     }
 }

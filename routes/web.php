@@ -30,6 +30,7 @@ Route::get('/home', function () {
 Route::get('/articles/create', [ArticleController::class, 'index'])->name('create-article')->middleware('auth');
 Route::post('/articles/create', [ArticleController::class, 'create'])->name('create-article');
 Route::get('/articles/all', [ArticleController::class, 'allArticles'])->name('all-articles');
+Route::get('/articles/{id}', [ArticleController::class, 'article'])->name('article');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'create'])->name('register');

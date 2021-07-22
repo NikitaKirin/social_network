@@ -14,7 +14,9 @@
         <tbody>
         @foreach($articles as $article)
             <tr>
-                <td>{{ $article->title }}</td>
+                <td>
+                    <a href="/articles/{{ $article->id }}"> {{ $article->title }}</a>
+                </td>
                 <td>{{ $article->annotation }}</td>
                 <td>{{ $article->user()->first()->name . ' ' . $article->user()->first()->surname }}</td>
             </tr>
