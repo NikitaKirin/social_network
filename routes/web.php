@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,10 @@ Route::get('/articles/all', [ArticleController::class, 'allArticles'])->name('al
 Route::get('/articles/{id}', [ArticleController::class, 'article'])->name('article');
 Route::get('/articles/{article}/edit', [ArticleController::class, 'showEditForm'])->name('article-edit-form');
 Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name('article-update');
+
+// User's routes
+Route::get('/user/edit', [UserController::class, 'showEditForm'])->name('user-edit-form');
+Route::post('/user/edit', [UserController::class, 'update'])->name('user-update');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'create'])->name('register');

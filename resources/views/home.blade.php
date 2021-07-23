@@ -11,5 +11,6 @@
         <li>{{ \Illuminate\Support\Facades\Auth::user()->city }}</li>
         <li>{{ \Illuminate\Support\Facades\Auth::user()->birthday }}</li>
     </ul>
+    <a class="btn btn-primary" href="{{ route('user-edit-form') }}">Изменить профиль</a>
 @endsection
 

@@ -6,14 +6,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RegisterController extends Controller
+class UserController extends Controller
 {
     const REGISTER_VALIDATOR = [
         'name'     => 'required|string|max:12',
         'surname'  => 'string|max:12',
         'city'     => 'string|max:15|nullable',
-        'email'    => 'required|email|unique:users',
-        'password' => 'required',
         'birthday' => 'date|nullable',
     ];
 
@@ -28,18 +26,19 @@ class RegisterController extends Controller
 
     public function index()
     {
-        return view('auth.registration-form');
+        //
     }
 
-    public function create(Request $request)
+    public function showEditForm()
+    {
+        return view('user.user-edit-form', ['user' => Auth::user()]);
+    }
+
+    public function update(Request $request)
     {
         $validate_fields = $request->validate(self::REGISTER_VALIDATOR, self::REGISTER_MESSAGES);
-        $user = User::create($validate_fields);
-        Auth::login($user);
-        if ($user)
-            return redirect()->route('home')->with('success', 'Вы успешно зарегистрированы и вошли в аккаунт!');
-
-        return redirect()->back()->withErrors('Произошла ошибка при регистрации пользователя. Попробуйте еще раз.');
+        $user = Auth::user()->fill($validate_fields);
+        $user->save();
+        return redirect()->route('home')->with('success', 'Вы успешно обновили свои данные!');
     }
-
 }
