@@ -35,6 +35,7 @@ Route::get('/articles/all', [ArticleController::class, 'allArticles'])->name('al
 Route::get('/articles/{id}', [ArticleController::class, 'article'])->name('article');
 Route::get('/articles/{article}/edit', [ArticleController::class, 'showEditForm'])->name('article-edit-form');
 Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name('article-update');
+Route::get('/user/{id}/articles/', [ArticleController::class, 'showUserArticles'])->name('user-articles');
 
 // User's routes
 Route::get('/user/edit', [UserController::class, 'showEditForm'])->name('user-edit-form');

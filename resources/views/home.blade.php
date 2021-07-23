@@ -12,5 +12,7 @@
         <li>{{ \Illuminate\Support\Facades\Auth::user()->birthday }}</li>
     </ul>
     <a class="btn btn-primary" href="{{ route('user-edit-form') }}">Изменить профиль</a>
+    <a class="btn btn-primary" href="{{ route('user-articles', ['id' => \Illuminate\Support\Facades\Auth::id()]) }}">Мои
+        статьи</a>
 @endsection
 

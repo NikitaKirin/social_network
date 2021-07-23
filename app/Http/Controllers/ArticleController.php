@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,5 +61,15 @@ class ArticleController extends Controller
         $article->fill($validate_fields);
         $article->save();
         return redirect()->route('article', ['id' => $article->id])->with('success', 'Ваша статья успешно обновлена!');
+    }
+
+    public function showUserArticles($user_id)
+    {
+        $articles = Article::where('user_id', $user_id)->get();
+        $user = User::find($user_id);
+        return view('articles.user-articles', [
+            'articles' => $articles,
+            'user'     => $user,
+        ]);
     }
 }

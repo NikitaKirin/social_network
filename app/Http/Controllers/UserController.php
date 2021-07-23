@@ -44,6 +44,8 @@ class UserController extends Controller
 
     public function showUserPage($id)
     {
+        if (Auth::id() == $id)
+            return redirect()->route('home');
         $user = User::find($id);
         return view('user.user-page', ['user' => $user]);
     }
