@@ -39,6 +39,7 @@ Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name(
 // User's routes
 Route::get('/user/edit', [UserController::class, 'showEditForm'])->name('user-edit-form');
 Route::post('/user/edit', [UserController::class, 'update'])->name('user-update');
+Route::get('/user/{id}', [UserController::class, 'showUserPage'])->name('user-page');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'create'])->name('register');

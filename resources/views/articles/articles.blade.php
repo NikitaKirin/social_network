@@ -18,7 +18,9 @@
                     <a href="/articles/{{ $article->id }}"> {{ $article->title }}</a>
                 </td>
                 <td>{{ $article->annotation }}</td>
-                <td>{{ $article->user()->first()->name . ' ' . $article->user()->first()->surname }}</td>
+                <td>
+                    <a href="{{ route('user-page', ['id' => $article->user_id]) }}">{{ $article->user()->first()->name . ' ' . $article->user()->first()->surname }} </a>
+                </td>
             </tr>
         @endforeach
         </tbody>

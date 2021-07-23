@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Моя страница')
-@include('inc.header')
 
 @section('main')
+    @include('inc.header')
     <h4>Добро
         пожаловать, {{ \Illuminate\Support\Facades\Auth::user()->name . ' ' . \Illuminate\Support\Facades\Auth::user()->surname . ' - ' . \Illuminate\Support\Facades\Auth::id() }}</h4>
     <p>Информация о вас:</p>

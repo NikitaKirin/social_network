@@ -41,4 +41,10 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('home')->with('success', 'Вы успешно обновили свои данные!');
     }
+
+    public function showUserPage($id)
+    {
+        $user = User::find($id);
+        return view('user.user-page', ['user' => $user]);
+    }
 }
