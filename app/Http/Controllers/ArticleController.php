@@ -48,4 +48,17 @@ class ArticleController extends Controller
         $article = Article::find($id);
         return view('articles.article', ['article' => $article]);
     }
+
+    public function showEditForm(Article $article)
+    {
+        return view('articles.edit-article-form', ['article' => $article]);
+    }
+
+    public function update(Request $request, Article $article)
+    {
+        $validate_fields = $request->validate(self::ARTICLE_VALIDATOR, self::ARTICLE_MESSAGES);
+        $article->fill($validate_fields);
+        $article->save();
+        return redirect()->route('article', ['id' => $article->id])->with('success', 'Ваша статья успешно обновлена!');
+    }
 }

@@ -9,4 +9,5 @@
     <p><i>{{ $article->annotation }}</i></p>
     <p><strong>{{ $article->text }}</strong></p>
     <p><i>Автор:</i>{{ $article->user()->first()->name . $article->user()->first()->surname }}</p>
+    <a href="{{ route('article-edit-form', ['article' => $article]) }}" class="btn btn-primary">Изменить</a>
 @endsection

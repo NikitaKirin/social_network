@@ -31,6 +31,8 @@ Route::get('/articles/create', [ArticleController::class, 'index'])->name('creat
 Route::post('/articles/create', [ArticleController::class, 'create'])->name('create-article');
 Route::get('/articles/all', [ArticleController::class, 'allArticles'])->name('all-articles');
 Route::get('/articles/{id}', [ArticleController::class, 'article'])->name('article');
+Route::get('/articles/{article}/edit', [ArticleController::class, 'showEditForm'])->name('article-edit-form');
+Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name('article-update');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'create'])->name('register');
