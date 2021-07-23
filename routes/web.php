@@ -27,6 +27,7 @@ Route::get('/home', function () {
     return view('home');
 })->name('home')->middleware('auth');
 
+// Article's routes
 Route::get('/articles/create', [ArticleController::class, 'index'])->name('create-article')->middleware('auth');
 Route::post('/articles/create', [ArticleController::class, 'create'])->name('create-article');
 Route::get('/articles/all', [ArticleController::class, 'allArticles'])->name('all-articles');
