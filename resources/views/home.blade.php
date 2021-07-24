@@ -4,7 +4,7 @@
 @section('main')
     @include('inc.header')
     <h4>Добро
-        пожаловать, {{ \Illuminate\Support\Facades\Auth::user()->name . ' ' . \Illuminate\Support\Facades\Auth::user()->surname . ' - ' . \Illuminate\Support\Facades\Auth::id() }}</h4>
+        пожаловать, {{ \Illuminate\Support\Facades\Auth::user()->name . ' ' . \Illuminate\Support\Facades\Auth::user()->surname }}</h4>
     <p>Информация о вас:</p>
     <ul>
         <li>{{ \Illuminate\Support\Facades\Auth::user()->email }}</li>
