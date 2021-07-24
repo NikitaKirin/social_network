@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class ArticleController extends Controller
 {
     const ARTICLE_VALIDATOR = [
-        'title'      => 'required|string|max:20',
+        'title'      => 'required|string|max:40',
         'annotation' => 'required|string|max:30',
         'text'       => 'string|required',
     ];

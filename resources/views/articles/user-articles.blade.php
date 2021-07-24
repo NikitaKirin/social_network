@@ -17,26 +17,24 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($articles as $article)
-            {{ $i = 1 }}
+        @for($i = 0; $i < count($articles); $i++)
             <tr>
                 <td>
-                    {{ $i }}
+                    {{ $i+1 }}
                 </td>
                 <td>
-                    <a href="{{ route('article', ['id' => $article->id]) }}">
-                        {{ $article->title }}
+                    <a href="{{ route('article', ['id' => $articles[$i]->id]) }}">
+                        {{ $articles[$i]->title }}
                     </a>
                 </td>
                 <td>
-                    {{ $article->annotation }}
+                    {{ $articles[$i]->annotation }}
                 </td>
                 <td>
-                    {{ $article->created_at }}
+                    {{ $articles[$i]->created_at }}
                 </td>
             </tr>
-            {{ $i = $i + 1 }}
-        @endforeach
+        @endfor
         </tbody>
     </table>
 @endsection
