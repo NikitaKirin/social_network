@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PageComment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,9 +45,28 @@ class UserController extends Controller
 
     public function showUserPage($id)
     {
+        $comments = PageComment::where('user_id', '=', $id)->latest()->get();
+        if (isset($comments))
+        {
+            foreach ($comments as $comment)
+            {
+                $author_comment = User::where('id', $comment->creator_id)->get()->first();
+                $comment['author_name'] = $author_comment->name;
+                $comment['author_surname'] = $author_comment->surname;
+                $comment['author_id'] = $author_comment->id;
+            }
+
+        }
+
         if (Auth::id() == $id)
-            return redirect()->route('home');
+            return redirect()->route('home', ['comments' => $comments]);
         $user = User::find($id);
+        if (count($comments))
+            return view('user.user-page', [
+                'user'     => $user,
+                'comments' => $comments,
+            ]);
+
         return view('user.user-page', ['user' => $user]);
     }
 }

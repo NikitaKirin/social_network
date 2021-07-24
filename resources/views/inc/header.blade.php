@@ -21,13 +21,23 @@
                             Статьи
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('create-article') }}">Создать статью</a></li>
-                            <li><a class="dropdown-item" href="{{ route('all-articles') }}">Список всех статей</a></li>
+                            @auth
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('create-article') }}">Создать статью</a>
+                                </li>
+                            @endauth
+                            <li>
+                                <a class="dropdown-item" href="{{ route('all-articles') }}">Список всех статей</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item"
-                                   href="{{ route('user-articles', ['id' => \Illuminate\Support\Facades\Auth::id()] ) }}">Мои статьи</a></li>
+                            @auth
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{{ route('user-articles', ['id' => \Illuminate\Support\Facades\Auth::id()] ) }}">Мои
+                                        статьи</a>
+                                </li>
+                            @endauth
                         </ul>
                     </li>
                 </ul>
