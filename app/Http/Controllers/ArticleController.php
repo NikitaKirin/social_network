@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\ArticleComment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +48,18 @@ class ArticleController extends Controller
     public function article($id)
     {
         $article = Article::find($id);
-        return view('articles.article', ['article' => $article]);
+        $comments = ArticleComment::where('article_id', $id)->latest()->get();
+        if (isset($comments))
+        {
+            foreach ($comments as $comment)
+            {
+                $author_comment = User::where('id', $comment->user_id)->get()->first();
+                $comment['author_name'] = $author_comment->name;
+                $comment['author_surname'] = $author_comment->surname;
+                $comment['author_id'] = $author_comment->id;
+            }
+        }
+        return view('articles.article', ['article' => $article, 'comments' => $comments]);
     }
 
     public function showEditForm(Article $article)

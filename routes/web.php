@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Article\CommentController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -36,6 +37,9 @@ Route::get('/articles/{id}', [ArticleController::class, 'article'])->name('artic
 Route::get('/articles/{article}/edit', [ArticleController::class, 'showEditForm'])->name('article-edit-form');
 Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name('article-update');
 Route::get('/user/{id}/articles/', [ArticleController::class, 'showUserArticles'])->name('user-articles');
+
+// Article's comments routes
+Route::post('articles/{article}/comments', [CommentController::class, 'store'])->name('articles.comments.store');
 
 // User's routes
 Route::get('/user/edit', [UserController::class, 'showEditForm'])->name('user-edit-form');
