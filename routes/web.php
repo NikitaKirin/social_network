@@ -1,12 +1,11 @@
 <?php
 
+use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\Article\CommentController;
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PageCommentController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,7 +46,7 @@ Route::post('/user/edit', [UserController::class, 'update'])->name('user-update'
 Route::get('/user/{id}', [UserController::class, 'showUserPage'])->name('user-page');
 
 //User-page's comments routes
-Route::post('/user/{user_id}/store', [PageCommentController::class, 'store'])->name('user-comment-store');
+Route::post('/user/{user_id}/store', [CommentController::class, 'store'])->name('user-comment-store');
 
 // Register's routes
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
