@@ -60,6 +60,7 @@ class UserController extends Controller
 
         if (Auth::id() == $id)
             return redirect()->route('home', ['comments' => $comments]);
+
         $user = User::find($id);
         if (count($comments))
             return view('user.user-page', [
