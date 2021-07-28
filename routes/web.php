@@ -29,13 +29,17 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 // Article's routes
-Route::get('/articles/create', [ArticleController::class, 'index'])->name('create-article')->middleware('auth');
-Route::post('/articles/create', [ArticleController::class, 'create'])->name('create-article');
-Route::get('/articles/all', [ArticleController::class, 'allArticles'])->name('all-articles');
-Route::get('/articles/{id}', [ArticleController::class, 'article'])->name('article');
-Route::get('/articles/{article}/edit', [ArticleController::class, 'showEditForm'])->name('article-edit-form');
-Route::patch('/articles/{article}', [ArticleController::class, 'update'])->name('article-update');
-Route::get('/user/{id}/articles/', [ArticleController::class, 'showUserArticles'])->name('user-articles');
+Route::prefix('articles')->group(function() {
+
+    Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('/create', [ArticleController::class, 'create'])->name('articles.create')->middleware('auth');
+    Route::post('/', [ArticleController::class, 'store'])->name('articles.store');
+    Route::get('/{article}', [ArticleController::class, 'show'])->name('articles.show');
+    Route::get('/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+    Route::patch('/{article}', [ArticleController::class, 'update'])->name('articles.update');
+    Route::get('/user/{user}/articles/', [ArticleController::class, 'indexUserArticles'])->name('user.articles.index');
+
+});
 
 // Article's comments routes
 Route::post('articles/{article}/comments', [CommentController::class, 'store'])->name('articles.comments.store');

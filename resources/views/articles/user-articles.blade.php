@@ -23,7 +23,7 @@
                     {{ $i+1 }}
                 </td>
                 <td>
-                    <a href="{{ route('article', ['id' => $articles[$i]->id]) }}">
+                    <a href="{{ route('articles.show', ['article' => $articles[$i]->id]) }}">
                         {{ $articles[$i]->title }}
                     </a>
                 </td>

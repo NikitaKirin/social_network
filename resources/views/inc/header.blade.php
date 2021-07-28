@@ -23,18 +23,18 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @auth
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('create-article') }}">Создать статью</a>
+                                    <a class="dropdown-item" href="{{ route('articles.create') }}">Создать статью</a>
                                 </li>
                             @endauth
                             <li>
-                                <a class="dropdown-item" href="{{ route('all-articles') }}">Список всех статей</a></li>
+                                <a class="dropdown-item" href="{{ route('articles.index') }}">Список всех статей</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             @auth
                                 <li>
                                     <a class="dropdown-item"
-                                       href="{{ route('user-articles', ['id' => \Illuminate\Support\Facades\Auth::id()] ) }}">Мои
+                                       href="{{ route('user.articles.index', ['user' => \Illuminate\Support\Facades\Auth::id()] ) }}">Мои
                                         статьи</a>
                                 </li>
                             @endauth

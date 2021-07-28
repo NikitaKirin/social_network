@@ -3,7 +3,7 @@
 
 @section('main')
     @include('inc.header')
-    <form method="post" action="{{ route('create-article') }}">
+    <form method="post" action="{{ route('articles.store') }}">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Название</label>
