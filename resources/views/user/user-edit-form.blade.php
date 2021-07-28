@@ -2,7 +2,7 @@
 @section('title', 'Изменить данные своего профиля')
 @section('main')
     @include('inc.header')
-    <form method="post" action="{{ route('user-update') }}">
+    <form method="post" action="{{ route('users.update') }}">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Имя</label>

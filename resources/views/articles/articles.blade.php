@@ -19,7 +19,7 @@
                 </td>
                 <td>{{ $article->annotation }}</td>
                 <td>
-                    <a href="{{ route('user-page', ['id' => $article->user_id]) }}">{{ $article->user()->first()->name . ' ' . $article->user()->first()->surname }} </a>
+                    <a href="{{ route('users.show', ['user' => $article->user_id]) }}">{{ $article->user()->first()->name . ' ' . $article->user()->first()->surname }} </a>
                 </td>
             </tr>
         @endforeach

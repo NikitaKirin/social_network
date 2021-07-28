@@ -11,7 +11,7 @@
         <li>{{ \Illuminate\Support\Facades\Auth::user()->city }}</li>
         <li>{{ \Illuminate\Support\Facades\Auth::user()->birthday }}</li>
     </ul>
-    <a class="btn btn-primary" href="{{ route('user-edit-form') }}">Изменить профиль</a>
+    <a class="btn btn-primary" href="{{ route('users.edit') }}">Изменить профиль</a>
     <a class="btn btn-primary" href="{{ route('user.articles.index', ['user' => \Illuminate\Support\Facades\Auth::id()]) }}">Мои
         статьи</a>
 
@@ -46,7 +46,7 @@
                         {{ $comments[$i]->text }}
                     </td>
                     <td>
-                        <a href="{{ route('user-page', ['id' => $comments[$i]->author_id]) }}">
+                        <a href="{{ route('users.show', ['user' => $comments[$i]->author_id]) }}">
                             {{ $comments[$i]->author_name . ' ' . $comments[$i]->author_surname }}
                         </a>
                     </td>

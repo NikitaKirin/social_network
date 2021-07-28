@@ -38,7 +38,7 @@ class RegisterController extends Controller
         $user = User::create($validate_fields);
         Auth::login($user);
         if ($user)
-            return redirect()->route('home')->with('success', 'Вы успешно зарегистрированы и вошли в аккаунт!');
+            return redirect()->route('users.index')->with('success', 'Вы успешно зарегистрированы и вошли в аккаунт!');
 
         return redirect()->back()->withErrors('Произошла ошибка при регистрации пользователя. Попробуйте еще раз.');
     }

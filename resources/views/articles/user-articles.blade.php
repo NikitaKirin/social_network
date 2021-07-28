@@ -5,7 +5,7 @@
 @section('main')
     @include('inc.header')
     <h3>Здесь представлены все статьи, которые создал&nbsp;
-        <a href="{{ route('user-page', ['id' => $user->id]) }}">{{ $user->name . ' ' . $user->surname }}</a>
+        <a href="{{ route('users.show', ['user' => $user->id]) }}">{{ $user->name . ' ' . $user->surname }}</a>
     </h3>
     <table class="table">
         <thead>

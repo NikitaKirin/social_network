@@ -32,6 +32,6 @@ class CommentController extends Controller
             'user_id'     => $user_id,
         ]);
 
-        return redirect()->route('user-page', ['id' => $user_id])->with('success', 'Ваш комментарий успешно добавлен!');
+        return redirect()->route('users.show', ['user' => $user_id])->with('success', 'Ваш комментарий успешно добавлен!');
     }
 }

@@ -9,7 +9,7 @@
     <p><i>{{ $article->annotation }}</i></p>
     <p><strong>{{ $article->text }}</strong></p>
     <p><i>Автор: </i>
-        <a href="{{ route('user-page', ['id' => $article->user_id]) }}">
+        <a href="{{ route('users.index', ['user' => $article->user_id]) }}">
             {{ $article->user()->first()->name . ' ' . $article->user()->first()->surname }}
         </a>
     </p>
@@ -46,7 +46,7 @@
                         {{ $comments[$i]->text }}
                     </td>
                     <td>
-                        <a href="{{ route('user-page', ['id' => $comments[$i]->user_id]) }}">
+                        <a href="{{ route('users.index', ['user' => $comments[$i]->user_id]) }}">
                             {{ $comments[$i]->author_name . ' ' . $comments[$i]->author_surname }}
                         </a>
                     </td>

@@ -33,7 +33,7 @@ class LoginController extends Controller
         {
             $user = User::where('email', $validate_fields['email'])->get()->first();
             Auth::login($user);
-            return redirect()->route('home')->with('success', 'Вы успешно вошли в систему!');
+            return redirect()->route('users.index')->with('success', 'Вы успешно вошли в систему!');
         }
 
         return redirect()->back()->withErrors('Введен неверный email или пароль');
