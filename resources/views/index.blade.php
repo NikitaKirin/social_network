@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Социальная сеть')
+@section('title', __('Социальная сеть'))
 @section('main')
     @include('inc.header')
     <form method="post" action="{{ route('login') }}">
