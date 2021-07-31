@@ -27,7 +27,7 @@ Route::post('/', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Article's routes
-Route::prefix('articles')->group(function() {
+Route::prefix('articles')->group(function () {
 
     Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
     Route::get('/create', [ArticleController::class, 'create'])->name('articles.create')->middleware('auth');
@@ -42,17 +42,12 @@ Route::prefix('articles')->group(function() {
 // Article's comments routes
 Route::post('articles/{article}/comments', [CommentController::class, 'store'])->name('articles.comments.store');
 
-// User's routes
-Route::prefix('users')->group( function ()
-{
-    Route::get('/', [HomeController::class, 'index'])->name('users.index')->middleware('auth');
-    Route::get('/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::post('/', [UserController::class, 'update'])->name('users.update');
-    Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
-});
 
 //User-page's comments routes
-Route::post('/user/{user_id}/store', [\App\Http\Controllers\User\CommentController::class, 'store'])->name('user-comment-store');
+Route::post('/user/{user_id}/store', [
+    \App\Http\Controllers\User\CommentController::class,
+    'store',
+])->name('user-comment-store');
 
 // Register's routes
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
