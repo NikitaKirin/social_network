@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Изменить данные своего профиля')
 @section('main')
-    @include('inc.header')
-    <form method="post" action="{{ route('users.update') }}">
+    <form method="post" action="{{ route('users.update') }}" class="mt-3">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Имя</label>

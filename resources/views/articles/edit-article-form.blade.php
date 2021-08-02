@@ -2,7 +2,6 @@
 @section('title', 'Изменить статью')
 
 @section('main')
-    @include('inc.header')
     <form method="post" action="{{ route('articles.update', ['article' => $article]) }}">
         @csrf
         @method('PATCH')

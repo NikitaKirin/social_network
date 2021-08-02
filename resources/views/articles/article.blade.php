@@ -2,8 +2,6 @@
 
 @section('title', 'Статья :: ' . $article->title)
 
-@include('inc.header')
-
 @section('main')
     <h2>{{ $article->title }}</h2>
     <p><i>{{ $article->annotation }}</i></p>

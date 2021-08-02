@@ -2,8 +2,7 @@
 @section('title', 'Все объявления')
 
 @section('main')
-    @include('inc.header')
-    <table class="table table-hover">
+    <table class="table table-hover mt-3">
         <thead>
         <tr>
             <th scope="col">Название</th>
