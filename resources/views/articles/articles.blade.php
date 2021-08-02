@@ -2,8 +2,7 @@
 @section('title', 'Все объявления')
 
 @section('main')
-    @include('inc.header')
-    <table class="table table-hover">
+    <table class="table table-hover mt-3">
         <thead>
         <tr>
             <th scope="col">Название</th>
@@ -19,7 +18,7 @@
                 </td>
                 <td>{{ $article->annotation }}</td>
                 <td>
-                    <a href="{{ route('user-page', ['id' => $article->user_id]) }}">{{ $article->user()->first()->name . ' ' . $article->user()->first()->surname }} </a>
+                    <a href="{{ route('users.show', ['user' => $article->user_id]) }}">{{ $article->user()->first()->name . ' ' . $article->user()->first()->surname }} </a>
                 </td>
             </tr>
         @endforeach

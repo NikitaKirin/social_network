@@ -1,9 +1,8 @@
 @extends('layouts.app')
-@section('title', 'Создать статью')
+@section('title', 'Изменить статью')
 
 @section('main')
-    @include('inc.header')
-    <form method="post" action="{{ route('article-update', ['article' => $article]) }}">
+    <form method="post" action="{{ route('articles.update', ['article' => $article]) }}">
         @csrf
         @method('PATCH')
         <div class="mb-3">

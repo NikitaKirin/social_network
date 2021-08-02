@@ -2,8 +2,7 @@
 @section('title', 'Моя страница')
 
 @section('main')
-    @include('inc.header')
-    <h4>Добро
+    <h4 class="mt-3">Добро
         пожаловать, {{ \Illuminate\Support\Facades\Auth::user()->name . ' ' . \Illuminate\Support\Facades\Auth::user()->surname }}</h4>
     <p>Информация о вас:</p>
     <ul>
@@ -11,8 +10,9 @@
         <li>{{ \Illuminate\Support\Facades\Auth::user()->city }}</li>
         <li>{{ \Illuminate\Support\Facades\Auth::user()->birthday }}</li>
     </ul>
-    <a class="btn btn-primary" href="{{ route('user-edit-form') }}">Изменить профиль</a>
-    <a class="btn btn-primary" href="{{ route('user-articles', ['id' => \Illuminate\Support\Facades\Auth::id()]) }}">Мои
+    <a class="btn btn-primary" href="{{ route('users.edit') }}">Изменить профиль</a>
+    <a class="btn btn-primary"
+       href="{{ route('user.articles.index', ['user' => \Illuminate\Support\Facades\Auth::id()]) }}">Мои
         статьи</a>
 
     <p style="margin-top: 10px;">Оставьте свой комментарий!</p>
@@ -46,7 +46,7 @@
                         {{ $comments[$i]->text }}
                     </td>
                     <td>
-                        <a href="{{ route('user-page', ['id' => $comments[$i]->author_id]) }}">
+                        <a href="{{ route('users.show', ['user' => $comments[$i]->author_id]) }}">
                             {{ $comments[$i]->author_name . ' ' . $comments[$i]->author_surname }}
                         </a>
                     </td>

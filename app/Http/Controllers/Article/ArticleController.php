@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Article;
 
+use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticleComment;
 use App\Models\User;
@@ -22,12 +23,12 @@ class ArticleController extends Controller
         'string'   => 'Данное поле содержит недопустимые символы',
     ];
 
-    public function index()
+    public function create()
     {
         return view('article-form');
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $validate_fields = $request->validate(self::ARTICLE_VALIDATOR, self::ARTICLE_MESSAGES);
 
@@ -35,7 +36,7 @@ class ArticleController extends Controller
         return redirect()->route('home')->with('success', 'Ваша статья успешно создана!');
     }
 
-    public function allArticles()
+    public function index()
     {
         $articles = Article::all();
         /*        foreach ($articles as $article)
@@ -45,7 +46,7 @@ class ArticleController extends Controller
         return view('articles.articles', ['articles' => $articles]);
     }
 
-    public function article($id)
+    public function show($id)
     {
         $article = Article::find($id);
         $comments = ArticleComment::where('article_id', $id)->latest()->get();
@@ -62,7 +63,7 @@ class ArticleController extends Controller
         return view('articles.article', ['article' => $article, 'comments' => $comments]);
     }
 
-    public function showEditForm(Article $article)
+    public function edit(Article $article)
     {
         return view('articles.edit-article-form', ['article' => $article]);
     }
@@ -72,10 +73,10 @@ class ArticleController extends Controller
         $validate_fields = $request->validate(self::ARTICLE_VALIDATOR, self::ARTICLE_MESSAGES);
         $article->fill($validate_fields);
         $article->save();
-        return redirect()->route('article', ['id' => $article->id])->with('success', 'Ваша статья успешно обновлена!');
+        return redirect()->route('articles.show', ['article' => $article->id])->with('success', 'Ваша статья успешно обновлена!');
     }
 
-    public function showUserArticles($user_id)
+    public function indexUserArticles($user_id)
     {
         $articles = Article::where('user_id', $user_id)->get();
         $user = User::find($user_id);

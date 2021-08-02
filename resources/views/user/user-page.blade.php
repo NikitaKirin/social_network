@@ -3,9 +3,8 @@
 @section('title', $user->name . ' ' . $user->surname)
 
 @section('main')
-    @include('inc.header')
     <p>Пользователь: {{ $user->name . ' ' . $user->surname }}</p>
-    <a class="btn btn-primary" href="{{ route('user-articles', ['id' => $user->id]) }}">Все
+    <a class="btn btn-primary" href="{{ route('user.articles.index', ['user' => $user->id]) }}">Все
         статьи, написанные пользователем</a>
 
     <p style="margin-top: 10px;">Оставьте свой комментарий!</p>
@@ -39,7 +38,7 @@
                         {{ $comments[$i]->text }}
                     </td>
                     <td>
-                        <a href="{{ route('user-page', ['id' => $comments[$i]->author_id]) }}">
+                        <a href="{{ route('users.show', ['user' => $comments[$i]->author_id]) }}">
                             {{ $comments[$i]->author_name . ' ' . $comments[$i]->author_surname }}
                         </a>
                     </td>

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\PageComment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class UserController extends Controller
         //
     }
 
-    public function showEditForm()
+    public function edit()
     {
         return view('user.user-edit-form', ['user' => Auth::user()]);
     }
@@ -40,10 +41,10 @@ class UserController extends Controller
         $validate_fields = $request->validate(self::REGISTER_VALIDATOR, self::REGISTER_MESSAGES);
         $user = Auth::user()->fill($validate_fields);
         $user->save();
-        return redirect()->route('home')->with('success', 'Вы успешно обновили свои данные!');
+        return redirect()->route('users.index')->with('success', 'Вы успешно обновили свои данные!');
     }
 
-    public function showUserPage($id)
+    public function show($id)
     {
         $comments = PageComment::where('user_id', '=', $id)->latest()->get();
         if (isset($comments))
@@ -59,7 +60,7 @@ class UserController extends Controller
         }
 
         if (Auth::id() == $id)
-            return redirect()->route('home', ['comments' => $comments]);
+            return redirect()->route('users.index', ['comments' => $comments]);
 
         $user = User::find($id);
         if (count($comments))

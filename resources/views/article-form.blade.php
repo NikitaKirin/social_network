@@ -2,8 +2,7 @@
 @section('title', 'Создать статью')
 
 @section('main')
-    @include('inc.header')
-    <form method="post" action="{{ route('create-article') }}">
+    <form method="post" action="{{ route('articles.store') }}" class="mt-3">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Название</label>

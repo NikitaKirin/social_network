@@ -2,18 +2,16 @@
 
 @section('title', 'Статья :: ' . $article->title)
 
-@include('inc.header')
-
 @section('main')
     <h2>{{ $article->title }}</h2>
     <p><i>{{ $article->annotation }}</i></p>
     <p><strong>{{ $article->text }}</strong></p>
     <p><i>Автор: </i>
-        <a href="{{ route('user-page', ['id' => $article->user_id]) }}">
+        <a href="{{ route('users.index', ['user' => $article->user_id]) }}">
             {{ $article->user()->first()->name . ' ' . $article->user()->first()->surname }}
         </a>
     </p>
-    <a href="{{ route('article-edit-form', ['article' => $article]) }}" class="btn btn-primary">Изменить</a>
+    <a href="{{ route('articles.edit', ['article' => $article]) }}" class="btn btn-primary">Изменить</a>
 
     <p style="margin-top: 10px;">Оставьте свой комментарий!</p>
     <form method="post" action="{{ route('articles.comments.store', ['article' => $article]) }}">
@@ -46,7 +44,7 @@
                         {{ $comments[$i]->text }}
                     </td>
                     <td>
-                        <a href="{{ route('user-page', ['id' => $comments[$i]->user_id]) }}">
+                        <a href="{{ route('users.index', ['user' => $comments[$i]->user_id]) }}">
                             {{ $comments[$i]->author_name . ' ' . $comments[$i]->author_surname }}
                         </a>
                     </td>

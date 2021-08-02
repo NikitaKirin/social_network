@@ -55,7 +55,7 @@ class CommentController extends Controller
             'article_id' => $article->id,
         ]);
 
-        return redirect()->route('article', ['id' => $article])->with('success', 'Ваш комментарий успешно добавлен!');
+        return redirect()->route('articles.show', ['article' => $article])->with('success', 'Ваш комментарий успешно добавлен!');
 
     }
 

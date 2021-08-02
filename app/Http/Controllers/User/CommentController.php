@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\PageComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PageCommentController extends Controller
+class CommentController extends Controller
 {
     const PAGE_COMMENT_VALIDATOR = [
         'text' => 'required',
@@ -31,6 +32,6 @@ class PageCommentController extends Controller
             'user_id'     => $user_id,
         ]);
 
-        return redirect()->route('user-page', ['id' => $user_id])->with('success', 'Ваш комментарий успешно добавлен!');
+        return redirect()->route('users.show', ['user' => $user_id])->with('success', 'Ваш комментарий успешно добавлен!');
     }
 }

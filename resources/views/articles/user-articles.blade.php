@@ -3,9 +3,8 @@
 @section('title', 'Статьи пользователя ::' . $user->name . ' ' . $user->surname)
 
 @section('main')
-    @include('inc.header')
-    <h3>Здесь представлены все статьи, которые создал&nbsp;
-        <a href="{{ route('user-page', ['id' => $user->id]) }}">{{ $user->name . ' ' . $user->surname }}</a>
+    <h3 class="mt-3">Здесь представлены все статьи, которые создал&nbsp;
+        <a href="{{ route('users.show', ['user' => $user->id]) }}">{{ $user->name . ' ' . $user->surname }}</a>
     </h3>
     <table class="table">
         <thead>
@@ -23,7 +22,7 @@
                     {{ $i+1 }}
                 </td>
                 <td>
-                    <a href="{{ route('article', ['id' => $articles[$i]->id]) }}">
+                    <a href="{{ route('articles.show', ['article' => $articles[$i]->id]) }}">
                         {{ $articles[$i]->title }}
                     </a>
                 </td>
