@@ -28,7 +28,7 @@
         </tr>
         </thead>
         <tbody>
-        @if(isset($comments))
+        @if( isset($comments) )
             @for($i = 0; $i < count($comments); $i++)
                 <tr>
                     <td>

@@ -28,32 +28,27 @@ class ArticleController extends Controller
         return view('article-form');
     }
 
-    public function store(Request $request)
+    public function store( Request $request )
     {
         $validate_fields = $request->validate(self::ARTICLE_VALIDATOR, self::ARTICLE_MESSAGES);
 
         Auth::user()->articles()->create($validate_fields);
-        return redirect()->route('home')->with('success', 'Ваша статья успешно создана!');
+        return redirect()->route('articles.index')->with('success', 'Ваша статья успешно создана!');
     }
 
     public function index()
     {
-        $articles = Article::all();
-        /*        foreach ($articles as $article)
-                {
-                    dd($article->user()->first());
-                }*/
+        //   $articles = Article::all();
+        $articles = Article::latest()->paginate(5);
         return view('articles.articles', ['articles' => $articles]);
     }
 
-    public function show($id)
+    public function show( $id )
     {
         $article = Article::find($id);
         $comments = ArticleComment::where('article_id', $id)->latest()->get();
-        if (isset($comments))
-        {
-            foreach ($comments as $comment)
-            {
+        if ( isset($comments) ) {
+            foreach ( $comments as $comment ) {
                 $author_comment = User::where('id', $comment->user_id)->get()->first();
                 $comment['author_name'] = $author_comment->name;
                 $comment['author_surname'] = $author_comment->surname;
@@ -63,12 +58,12 @@ class ArticleController extends Controller
         return view('articles.article', ['article' => $article, 'comments' => $comments]);
     }
 
-    public function edit(Article $article)
+    public function edit( Article $article )
     {
         return view('articles.edit-article-form', ['article' => $article]);
     }
 
-    public function update(Request $request, Article $article)
+    public function update( Request $request, Article $article )
     {
         $validate_fields = $request->validate(self::ARTICLE_VALIDATOR, self::ARTICLE_MESSAGES);
         $article->fill($validate_fields);
@@ -76,7 +71,7 @@ class ArticleController extends Controller
         return redirect()->route('articles.show', ['article' => $article->id])->with('success', 'Ваша статья успешно обновлена!');
     }
 
-    public function indexUserArticles($user_id)
+    public function indexUserArticles( $user_id )
     {
         $articles = Article::where('user_id', $user_id)->get();
         $user = User::find($user_id);
