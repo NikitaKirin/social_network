@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\ArticleComment;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ArticleController extends Controller
 {
@@ -63,12 +65,23 @@ class ArticleController extends Controller
         return view('articles.edit-article-form', ['article' => $article]);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function update( Request $request, Article $article )
     {
         $validate_fields = $request->validate(self::ARTICLE_VALIDATOR, self::ARTICLE_MESSAGES);
-        $article->fill($validate_fields);
-        $article->save();
-        return redirect()->route('articles.show', ['article' => $article->id])->with('success', 'Ваша статья успешно обновлена!');
+        // Используем гейт для проверки возможности править статью
+        if ( Gate::allows('update-article', $article) ) {
+            $article->fill($validate_fields);
+            $article->save();
+            return redirect()->route('articles.show', ['article' => $article->id])->with('success', 'Ваша статья успешно обновлена!');
+        }
+
+        else {
+            throw (new AuthorizationException('Вы не можете править чужую статью'));
+        }
+
     }
 
     public function indexUserArticles( $user_id )

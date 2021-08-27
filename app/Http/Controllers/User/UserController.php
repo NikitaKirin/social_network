@@ -36,7 +36,7 @@ class UserController extends Controller
         return view('user.user-edit-form', ['user' => Auth::user()]);
     }
 
-    public function update(Request $request)
+    public function update( Request $request )
     {
         $validate_fields = $request->validate(self::REGISTER_VALIDATOR, self::REGISTER_MESSAGES);
         $user = Auth::user()->fill($validate_fields);
@@ -44,13 +44,11 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'Вы успешно обновили свои данные!');
     }
 
-    public function show($id)
+    public function show( $id )
     {
         $comments = PageComment::where('user_id', '=', $id)->latest()->get();
-        if (isset($comments))
-        {
-            foreach ($comments as $comment)
-            {
+        if ( isset($comments) ) {
+            foreach ( $comments as $comment ) {
                 $author_comment = User::where('id', $comment->creator_id)->get()->first();
                 $comment['author_name'] = $author_comment->name;
                 $comment['author_surname'] = $author_comment->surname;
@@ -59,11 +57,11 @@ class UserController extends Controller
 
         }
 
-        if (Auth::id() == $id)
+        if ( Auth::id() == $id )
             return redirect()->route('users.index', ['comments' => $comments]);
 
         $user = User::find($id);
-        if (count($comments))
+        if ( count($comments) )
             return view('user.user-page', [
                 'user'     => $user,
                 'comments' => $comments,

@@ -12,8 +12,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+    protected $policies = [// 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -25,6 +24,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // Создаём гейт для ограничения правки чужих статей
+
+        Gate::define('update-article', function ( $user, $article ) {
+            return $user->id == $article->user_id;
+        });
     }
+
 }
