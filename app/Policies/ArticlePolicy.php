@@ -21,6 +21,6 @@ class ArticlePolicy
         if ( $user->id === $article->user->id ) {
             return Response::allow();
         }
-        return Response::deny('Вы не можете править чужое сообщение');
+        return Response::deny('Вы не можете править чужую статью');
     }
 }

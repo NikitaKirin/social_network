@@ -11,8 +11,9 @@
             {{ $article->user()->first()->name . ' ' . $article->user()->first()->surname }}
         </a>
     </p>
-    <a href="{{ route('articles.edit', ['article' => $article]) }}" class="btn btn-primary">Изменить</a>
-
+    @can('update', $article)
+        <a href="{{ route('articles.edit', ['article' => $article]) }}" class="btn btn-primary">Изменить</a>
+    @endcan
     <p style="margin-top: 10px;">Оставьте свой комментарий!</p>
     <form method="post" action="{{ route('articles.comments.store', ['article' => $article]) }}">
         @csrf
