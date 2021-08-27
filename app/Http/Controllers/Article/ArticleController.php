@@ -72,16 +72,16 @@ class ArticleController extends Controller
     {
         $validate_fields = $request->validate(self::ARTICLE_VALIDATOR, self::ARTICLE_MESSAGES);
         // Используем гейт для проверки возможности править статью
-        if ( Gate::allows('update-article', $article) ) {
-            $article->fill($validate_fields);
-            $article->save();
-            return redirect()->route('articles.show', ['article' => $article->id])->with('success', 'Ваша статья успешно обновлена!');
+/*        if ( Gate::allows('update-article', $article) ) {
+
         }
 
         else {
             throw (new AuthorizationException('Вы не можете править чужую статью'));
-        }
-
+        }*/
+        $article->fill($validate_fields);
+        $article->save();
+        return redirect()->route('articles.show', ['article' => $article->id])->with('success', 'Ваша статья успешно обновлена!');
     }
 
     public function indexUserArticles( $user_id )

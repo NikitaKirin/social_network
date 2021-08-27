@@ -33,8 +33,8 @@ Route::prefix('articles')->group(function () {
     Route::get('/create', [ArticleController::class, 'create'])->name('articles.create')->middleware('auth');
     Route::post('/', [ArticleController::class, 'store'])->name('articles.store');
     Route::get('/{article}', [ArticleController::class, 'show'])->name('articles.show');
-    Route::get('/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
-    Route::patch('/{article}', [ArticleController::class, 'update'])->name('articles.update');
+    Route::get('/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit')->middleware('can:update,article');
+    Route::patch('/{article}', [ArticleController::class, 'update'])->name('articles.update')->middleware('can:update,article');
     Route::get('/user/{user}/articles/', [ArticleController::class, 'indexUserArticles'])->name('user.articles.index');
 
 });
