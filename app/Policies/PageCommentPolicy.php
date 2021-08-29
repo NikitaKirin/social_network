@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\PageComment;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class PageCommentPolicy
 {
@@ -15,8 +16,10 @@ class PageCommentPolicy
         //
     }
 
-    public function update( User $user, PageComment $comment ): bool
+    public function update( User $user, PageComment $comment ): Response
     {
-        return $user->id === $comment->creator_id;
+        if($user->id === $comment->creator_id)
+            return Response::allow();
+        return Response::deny('Вы не можете править чужой комментарий!');
     }
 }
