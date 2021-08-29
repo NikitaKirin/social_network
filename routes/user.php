@@ -10,6 +10,6 @@ Route::prefix('users')->group(function () {
     Route::post('/', [UserController::class, 'update'])->name('users.update');
     Route::get('/{user}', [UserController::class, 'show'])->name('users.show');
     Route::post('/{user_id}/store', [CommentController::class, 'store',])->name('users.comment.store');
-    Route::get('/{comment}/edit', [CommentController::class, 'edit'])->name('users.comment.edit');
-    Route::patch('/{comment}/edit', [CommentController::class, 'update'])->name('users.comment.update');
+    Route::get('/{comment}/edit', [CommentController::class, 'edit'])->name('users.comment.edit')->middleware('can:update,comment');
+    Route::patch('/{comment}/edit', [CommentController::class, 'update'])->name('users.comment.update')->middleware('can:update,comment');
 });
