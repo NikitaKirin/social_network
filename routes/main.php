@@ -42,13 +42,6 @@ Route::prefix('articles')->group(function () {
 // Article's comments routes
 Route::post('articles/{article}/comments', [CommentController::class, 'store'])->name('articles.comments.store');
 
-
-//User-page's comments routes
-Route::post('/user/{user_id}/store', [
-    \App\Http\Controllers\User\CommentController::class,
-    'store',
-])->name('user-comment-store');
-
 // Register's routes
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'create'])->name('register');

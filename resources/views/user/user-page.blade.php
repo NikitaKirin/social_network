@@ -8,7 +8,7 @@
         статьи, написанные пользователем</a>
 
     <p style="margin-top: 10px;">Оставьте свой комментарий!</p>
-    <form method="post" action="{{ route('user-comment-store', ['user_id' => $user->id]) }}">
+    <form method="post" action="{{ route('users.comment.store', ['user_id' => $user->id]) }}">
         @csrf
         <div class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" rows="3"
@@ -25,6 +25,7 @@
             <th scope="col">Текст комментария</th>
             <th scope="col">Автор</th>
             <th scope="col">Дата создания</th>
+            <th scope="col">Действия</th>
         </tr>
         </thead>
         <tbody>
@@ -44,6 +45,9 @@
                     </td>
                     <td>
                         {{ $comments[$i]->created_at }}
+                    </td>
+                    <td>
+                        <a href="{{ route('users.comment.edit', ['comment' => $comments[$i]]) }}" class="btn btn-success">Изменить</a>
                     </td>
                 </tr>
             @endfor
